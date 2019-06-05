@@ -1,0 +1,56 @@
+drop table if exists hw3.widen_table;
+create table hw3.widen_table as 
+select 
+	company as company,
+	sum(case value when 'retention' then 1 else 0 end) as retention,
+	sum(case value when 'bonded-by-product' then 1 else 0 end) as bonded_by_product,
+	sum(case value when 'new-tech' then 1 else 0 end) as new_tech,
+	sum(case value when 'continuous-delivery' then 1 else 0 end) as continuous_delivery,
+	sum(case value when 'internal-mobility' then 1 else 0 end) as internal_mobility,
+	sum(case value when 'agile-dev' then 1 else 0 end) as agile_dev,
+	sum(case value when 'engineering-driven' then 1 else 0 end) as engineering_driven,
+	sum(case value when 'eq-iq' then 1 else 0 end) as eq_iq,
+	sum(case value when 'project-ownership' then 1 else 0 end) as project_ownership,
+	sum(case value when 'cross-dep' then 1 else 0 end) as cross_dep,
+	sum(case value when 'flat-organization' then 1 else 0 end) as flat_organization,
+	sum(case value when 'fast-paced' then 1 else 0 end) as fast_paced,
+	sum(case value when 'risk-taking' then 1 else 0 end) as risk_taking,
+	sum(case value when 'rapid-growth' then 1 else 0 end) as rapid_growth,
+	sum(case value when 'good-beer' then 1 else 0 end) as good_beer,
+	sum(case value when 'parents' then 1 else 0 end) as parents,
+	sum(case value when 'open-source' then 1 else 0 end) as open_source,
+	sum(case value when 'friends-outside-work' then 1 else 0 end) as friends_outside_work,
+	sum(case value when 'product-driven' then 1 else 0 end) as product_driven,
+	sum(case value when 'team-oriented' then 1 else 0 end) as team_oriented,
+	sum(case value when 'internal-promotion' then 1 else 0 end) as internal_promotion,
+	sum(case value when 'benefit-company' then 1 else 0 end) as benefit_company,
+	sum(case value when 'physical-wellness' then 1 else 0 end) as physical_wellness,
+	sum(case value when 'many-hats' then 1 else 0 end) as many_hats,
+	sum(case value when 'open-communication' then 1 else 0 end) as open_communication,
+	sum(case value when 'data-driven' then 1 else 0 end) as data_driven,
+	sum(case value when 'diverse-team' then 1 else 0 end) as diverse_team,
+	sum(case value when 'quality-code' then 1 else 0 end) as quality_code,
+	sum(case value when 'lunch-together' then 1 else 0 end) as lunch_together,
+	sum(case value when 'office-layout' then 1 else 0 end) as office_layout,
+	sum(case value when 'flex-hours' then 1 else 0 end) as flex_hours,
+	sum(case value when 'customer-first' then 1 else 0 end) as customer_first,
+	sum(case value when 'pair-programs' then 1 else 0 end) as pair_programs,
+	sum(case value when 'psychologically-safe' then 1 else 0 end) as psychologically_safe,
+	sum(case value when 'engages-community' then 1 else 0 end) as engages_community,
+	sum(case value when 'personal-growth' then 1 else 0 end) as personal_growth,
+	sum(case value when 'creative-innovative' then 1 else 0 end) as creative_innovative,
+	sum(case value when 'worklife-balance' then 1 else 0 end) as worklife_balance,
+	sum(case value when 'inclusive' then 1 else 0 end) as inclusive,
+	sum(case value when 'junior-devs' then 1 else 0 end) as junior_devs,
+	sum(case value when 'safe-env' then 1 else 0 end) as safe_env,
+	sum(case value when 'remote-ok' then 1 else 0 end) as remote_ok,
+	sum(case value when 'impressive-teammates' then 1 else 0 end) as impressive_teammates,
+	sum(case value when 'light-meetings' then 1 else 0 end) as light_meetings,
+	sum(case value when 'feedback' then 1 else 0 end) as feedback,
+	sum(case value when 'interns' then 1 else 0 end) as interns
+	from hw3.keyvalues
+	group by company
+	order by company;
+
+-- count number of rows in table
+select count(*) from hw3.widen_table;

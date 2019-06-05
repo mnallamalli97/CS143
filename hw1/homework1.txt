@@ -1,0 +1,7 @@
+1d. 
+
+∏(hour, trips/100) (σ (hour >= 7 AND hour < 10) OR (hour >= 17 AND hour < 19)) (hourly_ridership)
+
+1e. 
+
+∏(station, datetime, riders, condition) (σ condition='rainy' OR condition='sunny') (occupancy ⋈ weather)

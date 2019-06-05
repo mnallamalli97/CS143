@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>TuneSearch Results for {{query}}</title>
+		<link rel="stylesheet" type="text/css" href="/static/searchengine.css" media="screen" />
+	</head>
+	<body>
+		<div id="results_top">
+			<div id="logo">
+				<img src="/static/header.png" width=100px height=30px>
+			</div>
+			<div id="searchbar">
+				 <form action="{{ url_for('dosearch') }}" method="GET">
+					<div>
+						<input type="radio" name="query_type" value="or" checked>
+						<label for="or">OR</label>
+						<input type="radio" name="query_type" value="and">
+						<label for="and">AND</label>
+						<input type="text" maxlength=50 size=50 name="query" value="{{query}}"><input type="submit" value="Search">
+						<input type="hidden" name="page_num" value= 0>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		{% if results > 0 %}
+		<p><strong>{{ total_results }} results for </strong>{{query}}. </p>
+
+		<!-- Previous button logic -->
+		{% if page_num > 1 %}
+		<form style="display: inline-block" action="{{ url_for('dosearch') }}" method="GET">
+		<div>
+			<input type="submit" name="Previous" value="Previous"> </input>
+			<input type="hidden" name="page_num" value="{{page_num}}"> </input>
+			<input type="hidden" name="query_type" value="{{qtype}}"> </input>
+			<input type="hidden" name="query" value="{{query}}"> </input>
+			<input type="hidden" name="button_dir" value="Previous"></input>
+		</div>
+		</form>
+		{% endif %}
+
+		<!-- Next button logic -->
+		{% if total_results - (page_num * 20) > 0 %}
+		<form style="display: inline-block" action="{{ url_for('dosearch') }}" method="GET">
+		<div>
+			<input type="submit" name="Next" value="Next"> </input>
+			<input type="hidden" name="page_num" value="{{page_num}}"> </input>
+			<input type="hidden" name="query_type" value="{{qtype}}"> </input>
+			<input type="hidden" name="query" value="{{query}}"> </input>
+			<input type="hidden" name="button_dir" value="Next"></input>
+		</div>
+		</form>
+		{% endif %}
+
+		{% for result in search_results %}
+		<p><strong><a href="http://www.lyricsfreak.com{{ result[2] }}" target="_blank">{{ result[0] }}</a></strong> <em>by</em> {{ result[1] }} </p>
+		{% endfor %}
+		{% else %}
+
+		<p><strong>No results for </strong>{{query}}</p>
+		{% endif %}
+
+
+
+
+	</body>
+</html>
